@@ -12,7 +12,6 @@ AACM_FPSDinosaur::AACM_FPSDinosaur()
 	DinoMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Enemy Mesh"));
 	check(DinoMesh != nullptr);
 
-
 }
 
 // Called when the game starts or when spawned
@@ -26,7 +25,8 @@ void AACM_FPSDinosaur::BeginPlay()
 void AACM_FPSDinosaur::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	RotateDino();
+	
 }
 
 // Called to bind functionality to input
@@ -34,5 +34,27 @@ void AACM_FPSDinosaur::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+}
+
+void AACM_FPSDinosaur::RotateDino() {
+	//getting the player character and dino position every frame 
+	FVector CharacterPos = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+	FVector DinoPos = GetActorLocation();
+
+	CharacterPos = FVector(CharacterPos.X, CharacterPos.Y, 0);
+	DinoPos = FVector(DinoPos.X, DinoPos.Y, 0);
+	GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Blue, FString::Printf(TEXT("Player Location: %s"), *DinoPos.ToString()));
+
+	//on every frame, change the rotation
+	//FRotator Rotation = FRotator(PitchValue, YawValue, RollValue);
+
+	FRotator DinoRotation = UKismetMathLibrary::FindLookAtRotation(DinoPos, CharacterPos);
+	//FQuat QuatRotation = FQuat(DinoRotation);
+	AddActorLocalRotation(DinoRotation, false, 0, ETeleportType::None);
+}
+
+void AACM_FPSDinosaur::DinoRush() {
+	//TODO: If Dino is looking at player,(trace implementation?), then the dino
+	// will dash along the x-axis a fixed distance
 }
 
