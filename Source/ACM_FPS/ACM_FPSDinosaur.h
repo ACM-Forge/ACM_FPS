@@ -38,5 +38,5 @@ public:
 		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Enemy)
-		UStaticMeshComponent* DinoMesh;
+		UStaticMeshComponent* Dino;
 };
