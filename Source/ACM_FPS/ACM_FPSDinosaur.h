@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "ACM_FPSProjectile.h"
 #include "ACM_FPSDinosaur.generated.h"
 
 UCLASS()
@@ -32,6 +33,9 @@ public:
 
 	//Called to move towards the player
 	void DinoRush();
+
+	UFUNCTION()
+		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Enemy)
 		UStaticMeshComponent* DinoMesh;
