@@ -6,6 +6,8 @@
 #include "GameFramework/Pawn.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "ACM_FPSProjectile.h"
+#include "ACM_FPSCharacter.h"
+#include "DrawDebugHelpers.h"
 #include "ACM_FPSDinosaur.generated.h"
 
 UCLASS()
@@ -29,10 +31,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 	//Called to look at the player
-	void RotateDino();
+	void RotateDino(float DeltaTime);
 
 	//Called to move towards the player
-	void DinoRush();
+	void DinoRush(float DeltaTime);
 
 	UFUNCTION()
 		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
