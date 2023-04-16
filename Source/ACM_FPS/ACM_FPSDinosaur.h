@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "Kismet/KismetMathLibrary.h"
+#include "ACM_FPSProjectile.h"
 #include "ACM_FPSDinosaur.generated.h"
 
 UCLASS()
@@ -25,8 +27,16 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+	//Called to look at the player
+	void RotateDino();
 
-	UPROPERTY(VisibleDefaultsOnly, Category = "Enemy")
-		UStaticMeshComponent* DinoMesh;
+	//Called to move towards the player
+	void DinoRush();
 
+	UFUNCTION()
+		void OnCompHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	UPROPERTY(VisibleDefaultsOnly, Category = Enemy)
+		UStaticMeshComponent* Dino;
 };
